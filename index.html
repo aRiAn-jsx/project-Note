@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="dark" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,10 @@
             <div class="header-content">
                 <h1><i class="fas fa-sticky-note"></i> دفترچه یادداشت اینده</h1>
                 <div class="header-actions">
+                    <!-- دکمه دارک مود -->
+                    <button class="btn btn-theme" id="themeToggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
                     <button class="btn btn-primary" onclick="openModal()">
                         <i class="fas fa-plus"></i> یادداشت جدید
                     </button>
