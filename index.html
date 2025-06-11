@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دفترچه یادداشت پیشرفته امیر</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-sticky-note"></i> دفترچه یادداشت اینده</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="openModal()">
+                        <i class="fas fa-plus"></i> یادداشت جدید
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportNotes()">
+                        <i class="fas fa-download"></i> خروجی
+                    </button>
+                    <button class="btn btn-secondary" onclick="importNotes()">
+                        <i class="fas fa-upload"></i> ورودی
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Search -->
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="جستجو در یادداشت‌ها...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">همه</button>
+                <button class="filter-btn" data-filter="personal">شخصی</button>
+                <button class="filter-btn" data-filter="work">کاری</button>
+                <button class="filter-btn" data-filter="important">مهم</button>
+                <button class="filter-btn" data-filter="pinned">سنجاق شده</button>
+            </div>
+        </div>
+
+        <!-- Notes Container -->
+        <div class="notes-container">
+            <!-- View Toggle -->
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="grid">
+                    <i class="fas fa-th"></i>
+                </button>
+                <button class="view-btn" data-view="list">
+                    <i class="fas fa-list"></i>
+                </button>
+                <button class="view-btn" data-view="masonry">
+                    <i class="fas fa-th-large"></i>
+                </button>
+            </div>
+
+            <!-- Notes Grid -->
+            <div class="notes-grid grid-view" id="notesGrid">
+                <!-- یادداشت‌ها اینجا نمایش داده می‌شوند -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-clipboard"></i>
+                <p>هنوز یادداشتی ندارید. اولین یادداشت خود را ایجاد کنید!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-edit"></i> یادداشت جدید</h2>
+                <button class="close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="noteForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="noteTitle">عنوان یادداشت:</label>
+                        <input type="text" id="noteTitle" required placeholder="عنوان یادداشت را وارد کنید...">
+                    </div>
+                    <div class="form-group">
+                        <label for="noteCategory">دسته‌بندی:</label>
+                        <select id="noteCategory">
+                            <option value="personal">شخصی</option>
+                            <option value="work">کاری</option>
+                            <option value="important">مهم</option>
+                            <option value="ideas">ایده‌ها</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="noteTags">برچسب‌ها (با کاما جدا کنید):</label>
+                    <input type="text" id="noteTags" placeholder="مثال: کار، مهم، پروژه">
+                </div>
+                
+                <div class="form-group">
+                    <label for="noteContent">متن یادداشت:</label>
+                    <textarea id="noteContent" required placeholder="متن یادداشت را وارد کنید..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="noteColor">رنگ یادداشت:</label>
+                    <div class="color-picker">
+                        <input type="color" id="noteColor" value="#3498db">
+                        <div class="color-presets">
+                            <div class="color-preset" data-color="#3498db"></div>
+                            <div class="color-preset" data-color="#e74c3c"></div>
+                            <div class="color-preset" data-color="#27ae60"></div>
+                            <div class="color-preset" data-color="#f39c12"></div>
+                            <div class="color-preset" data-color="#9b59b6"></div>
+                            <div class="color-preset" data-color="#1abc9c"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> ذخیره
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                        <i class="fas fa-times"></i> انصراف
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="fileInput" accept=".json" style="display: none;">
+
+    <script src="scripts.js"></script>
+</body>
+</html>
